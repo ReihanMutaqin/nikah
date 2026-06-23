@@ -1050,7 +1050,7 @@
                   React + TS
                 </div>
               </div>
-              <a href="./Wedding/app" class="card-action-btn primary-action">
+              <a href="/wedding/" class="card-action-btn primary-action">
                 Buka
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
               </a>
@@ -1245,7 +1245,7 @@
         </div>
       </div>
       <div class="quick-actions">
-        <a href="./Wedding/app" class="qa-card">
+        <a href="/wedding/" class="qa-card">
           <div class="qa-icon">👁</div>
           <div class="qa-label">Pratinjau Template</div>
           <div class="qa-sublabel">Buka template Wedding Sketch di browser</div>
@@ -1319,7 +1319,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Buat Template Baru
         </button>
-        <a href="./Wedding/app" class="btn-ghost">Lihat Template Wedding →</a>
+        <a href="/wedding/" class="btn-ghost">Lihat Template Wedding →</a>
       </div>
     </div>
 
@@ -1398,7 +1398,7 @@
         title: '🔗 Bagikan Template',
         desc: 'Salin link demo berikut untuk dikirimkan ke klien Anda.',
         fields: [
-          { placeholder: 'http://localhost:5173/ (link demo lokal)', type: 'text', readonly: true },
+          { placeholder: window.location.origin + '/wedding/', type: 'text', readonly: true },
         ],
         btn: 'Salin Link',
         btnClass: ''
@@ -1453,7 +1453,7 @@
 
     function handleModalAction(key) {
       if (key === 'share') {
-        navigator.clipboard.writeText('http://localhost:5173/').catch(() => {});
+        navigator.clipboard.writeText(window.location.origin + '/wedding/').catch(() => {});
       }
       closeModal();
       showToast(key);
