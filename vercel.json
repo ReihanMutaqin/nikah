@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd Wedding/app && npm install && npm run build",
+  "outputDirectory": "Wedding/app/dist",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
