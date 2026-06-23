@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 25% 96%;
+    --foreground: 0 0% 29%;
+    --card: 40 25% 96%;
+    --card-foreground: 0 0% 29%;
+    --popover: 40 25% 96%;
+    --popover-foreground: 0 0% 29%;
+    --primary: 340 45% 67%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 76 32% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 340 45% 67%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 76 32% 52%;
+    --input: 40 20% 88%;
+    --ring: 340 45% 67%;
+    --radius: 0.625rem;
+
+    /* Wedding Theme Colors */
+    --bg-primary: #F8F5F0;
+    --bg-pink: #F2D0D8;
+    --text-pink: #D4849C;
+    --text-olive: #A3B565;
+    --text-dark: #4A4A4A;
+    --accent-olive: #8FA355;
+    --border-sketch: rgba(163, 181, 101, 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Patrick Hand', cursive;
+    background-color: var(--bg-primary);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+  
+  .font-hand {
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .font-arabic {
+    font-family: 'Amiri', serif;
+  }
+  
+  .text-pink {
+    color: var(--text-pink);
+  }
+  
+  .text-olive {
+    color: var(--text-olive);
+  }
+  
+  .bg-wedding-pink {
+    background-color: var(--bg-pink);
+  }
+  
+  .bg-wedding-cream {
+    background-color: var(--bg-primary);
+  }
+  
+  .border-sketch {
+    border-color: var(--border-sketch);
+  }
+  
+  .sketch-shadow {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-olive);
+  border-radius: 3px;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 1s;
+}

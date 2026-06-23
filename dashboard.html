@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rdir Studio — Dashboard Manajemen Template</title>
+  <meta name="description" content="Dashboard pusat manajemen template undangan digital Rdir Studio. Kelola semua template undangan pernikahan, ulang tahun, dan acara spesial Anda dalam satu tempat." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark: #0D0D14;
+      --bg-card: #13131F;
+      --bg-card-hover: #1A1A2E;
+      --bg-surface: #1C1C2E;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.15);
+
+      --gold: #D4A853;
+      --gold-light: #F0C97A;
+      --gold-glow: rgba(212, 168, 83, 0.25);
+
+      --rose: #E8748A;
+      --rose-light: #F4A0B0;
+      --rose-glow: rgba(232, 116, 138, 0.2);
+
+      --teal: #4ECDC4;
+      --teal-glow: rgba(78, 205, 196, 0.2);
+
+      --purple: #9B72CF;
+      --purple-glow: rgba(155, 114, 207, 0.2);
+
+      --amber: #F59E0B;
+      --amber-glow: rgba(245, 158, 11, 0.2);
+
+      --text-primary: #F0EEF8;
+      --text-secondary: rgba(240, 238, 248, 0.55);
+      --text-muted: rgba(240, 238, 248, 0.35);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Noise Texture Overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── Ambient Glow BG ─── */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-bg .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+    }
+    .ambient-bg .glow-1 {
+      width: 600px; height: 600px;
+      background: var(--gold);
+      top: -200px; left: -150px;
+      animation: driftA 18s ease-in-out infinite alternate;
+    }
+    .ambient-bg .glow-2 {
+      width: 500px; height: 500px;
+      background: var(--rose);
+      top: 30%; right: -150px;
+      animation: driftB 22s ease-in-out infinite alternate;
+    }
+    .ambient-bg .glow-3 {
+      width: 400px; height: 400px;
+      background: var(--purple);
+      bottom: -100px; left: 30%;
+      animation: driftA 16s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes driftA {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(60px, 40px) scale(1.1); }
+    }
+    @keyframes driftB {
+      from { transform: translate(0, 0) scale(1.05); }
+      to   { transform: translate(-50px, 60px) scale(0.95); }
+    }
+
+    /* ─── Layout ─── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(13, 13, 20, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+    .nav-logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.06); }
+    .nav-btn {
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1000;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px var(--gold-glow);
+      text-decoration: none;
+    }
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(212, 168, 83, 0.4);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 10px;
+      background: rgba(212, 168, 83, 0.12);
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gold-light);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.6s ease both;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--gold);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+    .hero-title {
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.7s 0.1s ease both;
+    }
+    .hero-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--rose-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-weight: 400;
+      animation: fadeInUp 0.7s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.7s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1000;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 32px var(--gold-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(212, 168, 83, 0.45);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Stats Strip ─── */
+    .stats-strip {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+      animation: fadeIn 0.8s 0.5s ease both;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ─── Section Headers ─── */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+    .section-title span { color: var(--gold); }
+
+    /* ─── Filter Bar ─── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-chip:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .filter-chip.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #1a1000;
+      font-weight: 600;
+    }
+
+    /* ─── Template Grid ─── */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    /* ─── Template Card ─── */
+    .template-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      animation: fadeInUp 0.5s ease both;
+    }
+    .template-card:nth-child(1) { animation-delay: 0.05s; }
+    .template-card:nth-child(2) { animation-delay: 0.1s; }
+    .template-card:nth-child(3) { animation-delay: 0.15s; }
+    .template-card:nth-child(4) { animation-delay: 0.2s; }
+    .template-card:nth-child(5) { animation-delay: 0.25s; }
+    .template-card:nth-child(6) { animation-delay: 0.3s; }
+    .template-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    /* Card Glow on Hover */
+    .template-card[data-color="gold"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--gold-glow); border-color: rgba(212,168,83,0.3); }
+    .template-card[data-color="rose"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--rose-glow); border-color: rgba(232,116,138,0.3); }
+    .template-card[data-color="teal"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--teal-glow); border-color: rgba(78,205,196,0.3); }
+    .template-card[data-color="purple"]:hover{ box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--purple-glow); border-color: rgba(155,114,207,0.3); }
+    .template-card[data-color="amber"]:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--amber-glow); border-color: rgba(245,158,11,0.3); }
+
+    /* Card Thumbnail */
+    .card-thumb {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .card-thumb-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .template-card:hover .card-thumb-bg { transform: scale(1.05); }
+    .card-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(13,13,20,0.85) 100%);
+    }
+    .card-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      position: relative;
+    }
+    .card-thumb-placeholder.gold-bg   { background: linear-gradient(135deg, #2A1F00, #3D2D00); }
+    .card-thumb-placeholder.rose-bg   { background: linear-gradient(135deg, #2A0A12, #3D1020); }
+    .card-thumb-placeholder.teal-bg   { background: linear-gradient(135deg, #002A28, #003D3A); }
+    .card-thumb-placeholder.purple-bg { background: linear-gradient(135deg, #1A0A2E, #250D42); }
+    .card-thumb-placeholder.amber-bg  { background: linear-gradient(135deg, #2A1A00, #3D2500); }
+    .card-thumb-placeholder.dark-bg   { background: linear-gradient(135deg, #0D0D20, #15152D); }
+
+    /* Preview Screen inside placeholder */
+    .phone-preview {
+      position: absolute;
+      width: 80px; height: 145px;
+      background: #0D0D14;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.15);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-preview-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      font-size: 7px;
+      text-align: center;
+      gap: 4px;
+    }
+
+    /* Badges on card */
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+    .badge-live    { background: rgba(78,205,196,0.2); color: var(--teal); border: 1px solid rgba(78,205,196,0.35); }
+    .badge-soon    { background: rgba(245,158,11,0.2); color: var(--amber); border: 1px solid rgba(245,158,11,0.35); }
+    .badge-draft   { background: rgba(255,255,255,0.08); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.15); }
+    .badge-new     { background: rgba(232,116,138,0.2); color: var(--rose); border: 1px solid rgba(232,116,138,0.35); }
+    .badge-popular { background: rgba(212,168,83,0.2); color: var(--gold); border: 1px solid rgba(212,168,83,0.35); }
+
+    /* Card Type tag */
+    .card-type-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Card Body */
+    .card-body { padding: 20px 22px 22px; }
+    .card-category {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .cat-gold   { color: var(--gold); }
+    .cat-rose   { color: var(--rose); }
+    .cat-teal   { color: var(--teal); }
+    .cat-purple { color: var(--purple); }
+    .cat-amber  { color: var(--amber); }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    /* Card Meta */
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .card-meta-stats {
+      display: flex;
+      gap: 16px;
+    }
+    .meta-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .meta-stat svg { opacity: 0.6; }
+
+    .card-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .card-action-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+    .card-action-btn.primary-action {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1000;
+      border-color: transparent;
+    }
+    .card-action-btn.primary-action:hover {
+      box-shadow: 0 4px 20px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Coming Soon Card ─── */
+    .template-card.coming-soon {
+      opacity: 0.65;
+      cursor: default;
+    }
+    .template-card.coming-soon:hover {
+      transform: translateY(-2px);
+      box-shadow: none;
+    }
+
+    /* ─── Feature Showcase ─── */
+    .features-section { padding: 80px 0; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.5s ease both;
+    }
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .fi-gold   { background: rgba(212,168,83,0.15); }
+    .fi-rose   { background: rgba(232,116,138,0.15); }
+    .fi-teal   { background: rgba(78,205,196,0.15); }
+    .fi-purple { background: rgba(155,114,207,0.15); }
+    .feature-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ─── Quick Actions ─── */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 48px 0 80px;
+    }
+    .qa-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .qa-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .qa-icon { font-size: 28px; }
+    .qa-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .qa-sublabel {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ─── CTA Banner ─── */
+    .cta-banner {
+      background: var(--bg-card);
+      border: 1px solid rgba(212,168,83,0.2);
+      border-radius: var(--radius-xl);
+      padding: 64px 48px;
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,83,0.12) 0%, transparent 70%);
+    }
+    .cta-title {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-title span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover { color: var(--text-primary); }
+
+    /* ─── Keyframes ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 72px 0 60px; }
+      .stats-strip { gap: 32px; }
+      .template-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; }
+      .cta-banner { padding: 48px 24px; }
+      .cta-title { font-size: 28px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(212,168,83,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(212,168,83,0.5); }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      transform: scale(0.9) translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-overlay.open .modal {
+      transform: scale(1) translateY(0);
+    }
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .modal-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .modal-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s ease;
+    }
+    .modal-input:focus {
+      outline: none;
+      border-color: rgba(212,168,83,0.5);
+    }
+    .modal-input::placeholder { color: var(--text-muted); }
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+    .btn-close {
+      padding: 10px 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-close:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+
+    /* Tooltip */
+    .tooltip-wrapper { position: relative; display: inline-block; }
+    .tooltip-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .tooltip-wrapper:hover .tooltip-tip { opacity: 1; }
+
+    /* Progress bar */
+    .progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transition: width 1s ease;
+    }
+
+    /* Notification dot */
+    .notif-dot {
+      width: 8px; height: 8px;
+      background: var(--rose);
+      border-radius: 50%;
+      position: absolute;
+      top: -2px; right: -2px;
+      box-shadow: 0 0 8px var(--rose);
+      animation: pulse 2s ease infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient-bg">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+  </div>
+
+  <!-- ─── Navigation ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">✦</div>
+        <span class="nav-logo-text">Rdir <span>Studio</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#templates" class="nav-link">Template</a>
+        <a href="#fitur" class="nav-link">Fitur</a>
+        <a href="#aksi" class="nav-link">Quick Actions</a>
+        <div class="tooltip-wrapper" style="position:relative;">
+          <a href="#" class="nav-link" style="position:relative;">
+            Notifikasi
+            <span class="notif-dot"></span>
+          </a>
+          <span class="tooltip-tip">3 template baru tersedia</span>
+        </div>
+      </div>
+      <button class="nav-btn" onclick="openModal('new-template')">+ Buat Template</button>
+    </div>
+  </nav>
+
+  <!-- ─── Main Content ─── -->
+  <div class="wrapper">
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Platform Aktif · 1 Template Live
+      </div>
+      <h1 class="hero-title">
+        Dashboard <br>
+        <span class="line2">Rdir Studio</span>
+      </h1>
+      <p class="hero-subtitle">
+        Pusat manajemen semua template undangan digital Anda. 
+        Kelola, pratinjau, dan bagikan dalam satu platform yang elegan.
+      </p>
+      <div class="hero-actions">
+        <a href="#templates" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Lihat Semua Template
+        </a>
+        <button class="btn-ghost" onclick="openModal('new-template')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Tambah Template Baru
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <div class="stats-strip">
+      <div class="stat-item">
+        <div class="stat-number" id="stat-templates">1</div>
+        <div class="stat-label">Template Dibuat</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="stat-live">1</div>
+        <div class="stat-label">Template Live</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="stat-views">—</div>
+        <div class="stat-label">Total Tayangan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="stat-orders">—</div>
+        <div class="stat-label">Pesanan Masuk</div>
+      </div>
+    </div>
+
+    <!-- ─── Template Gallery ─── -->
+    <section id="templates">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Koleksi Template</div>
+          <h2 class="section-title">Semua <span>Template</span> Anda</h2>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-chip active" onclick="filterTemplates('semua', this)">Semua</button>
+          <button class="filter-chip" onclick="filterTemplates('pernikahan', this)">Pernikahan</button>
+          <button class="filter-chip" onclick="filterTemplates('ulang-tahun', this)">Ulang Tahun</button>
+          <button class="filter-chip" onclick="filterTemplates('lainnya', this)">Lainnya</button>
+        </div>
+      </div>
+
+      <div class="template-grid" id="template-grid">
+
+        <!-- ─── Template 1: Wedding Sketch ─── -->
+        <div class="template-card" data-color="gold" data-cat="pernikahan" data-status="live">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder gold-bg">
+              <!-- Phone Preview -->
+              <div class="phone-preview">
+                <div class="phone-preview-inner" style="background: #F8F5F0; color: #4A4A4A;">
+                  <div style="font-family:'Dancing Script',cursive; font-size:9px; color:#D4849C;">Sarah & Ahmad</div>
+                  <div style="font-size:6px; color:#A3B565; letter-spacing:1px;">WEDDING</div>
+                  <div style="width:40px; height:1px; background:#A3B565; margin:3px 0;"></div>
+                  <div style="font-size:5px; color:#4A4A4A;">12 · 12 · 2025</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-thumb-overlay"></div>
+            <div class="card-type-tag">💒 Pernikahan</div>
+            <div class="card-badge badge-live">● Live</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category cat-gold">Undangan Digital</div>
+            <div class="card-title">Wedding Sketch</div>
+            <div class="card-desc">Template pernikahan bergaya sketsa artistik dengan palet cream, pink, dan olive. Dilengkapi splash screen, countdown, galeri, dan RSVP.</div>
+            <div class="progress-bar" title="Progress pengembangan">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 100% selesai</div>
+            <div class="card-meta">
+              <div class="card-meta-stats">
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  12 Section
+                </div>
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/></svg>
+                  React + TS
+                </div>
+              </div>
+              <a href="./Wedding/app" class="card-action-btn primary-action">
+                Buka
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Template 2: Elegant Floral (Coming Soon) ─── -->
+        <div class="template-card coming-soon" data-color="rose" data-cat="pernikahan" data-status="coming-soon">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder rose-bg">
+              <div class="phone-preview">
+                <div class="phone-preview-inner" style="background: #1a0510; color: #F4A0B0;">
+                  <div style="font-size:8px;">🌸</div>
+                  <div style="font-size:7px; color:#F4A0B0;">Elegant</div>
+                  <div style="font-size:6px; color:rgba(244,160,176,0.5);">Floral</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-thumb-overlay"></div>
+            <div class="card-type-tag">💒 Pernikahan</div>
+            <div class="card-badge badge-soon">Segera Hadir</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category cat-rose">Undangan Digital</div>
+            <div class="card-title">Elegant Floral</div>
+            <div class="card-desc">Template pernikahan mewah dengan ilustrasi bunga watercolor, tipografi serif klasik, dan animasi petal jatuh yang romantis.</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 20%; background: linear-gradient(90deg, var(--rose), var(--rose-light));"></div>
+            </div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 20% · Dalam perencanaan</div>
+            <div class="card-meta">
+              <div class="card-meta-stats">
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Segera
+                </div>
+              </div>
+              <button class="card-action-btn" onclick="openModal('notify')">
+                Notifikasi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Template 3: Modern Minimalis (Coming Soon) ─── -->
+        <div class="template-card coming-soon" data-color="teal" data-cat="pernikahan" data-status="coming-soon">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder teal-bg">
+              <div class="phone-preview">
+                <div class="phone-preview-inner" style="background: #001a1a; color: #4ECDC4;">
+                  <div style="font-size:8px;">◆</div>
+                  <div style="font-size:7px; color:#4ECDC4;">Modern</div>
+                  <div style="font-size:6px; color:rgba(78,205,196,0.5);">Minimal</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-thumb-overlay"></div>
+            <div class="card-type-tag">💒 Pernikahan</div>
+            <div class="card-badge badge-soon">Segera Hadir</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category cat-teal">Undangan Digital</div>
+            <div class="card-title">Modern Minimalis</div>
+            <div class="card-desc">Template pernikahan bertema gelap modern dengan aksen teal, layout bersih, dan animasi halus yang kontemporer.</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 10%; background: linear-gradient(90deg, var(--teal), #7FFFD4);"></div>
+            </div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 10% · Dalam perencanaan</div>
+            <div class="card-meta">
+              <div class="card-meta-stats">
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Segera
+                </div>
+              </div>
+              <button class="card-action-btn" onclick="openModal('notify')">
+                Notifikasi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Template 4: Birthday Glam ─── -->
+        <div class="template-card coming-soon" data-color="purple" data-cat="ulang-tahun" data-status="coming-soon">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder purple-bg">
+              <div class="phone-preview">
+                <div class="phone-preview-inner" style="background: #100520; color: #C4A0F0;">
+                  <div style="font-size:8px;">🎂</div>
+                  <div style="font-size:7px; color:#C4A0F0;">Birthday</div>
+                  <div style="font-size:6px; color:rgba(196,160,240,0.5);">Glam</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-thumb-overlay"></div>
+            <div class="card-type-tag">🎂 Ulang Tahun</div>
+            <div class="card-badge badge-soon">Segera Hadir</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category cat-purple">Undangan Digital</div>
+            <div class="card-title">Birthday Glam</div>
+            <div class="card-desc">Template ulang tahun mewah dengan efek glitter, konfeti animasi, countdown hari-H, dan RSVP interaktif untuk acara spesial.</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 5%; background: linear-gradient(90deg, var(--purple), #C4A0F0);"></div>
+            </div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 5% · Dalam perencanaan</div>
+            <div class="card-meta">
+              <div class="card-meta-stats">
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Segera
+                </div>
+              </div>
+              <button class="card-action-btn" onclick="openModal('notify')">
+                Notifikasi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Template 5: Khitanan Islami ─── -->
+        <div class="template-card coming-soon" data-color="amber" data-cat="lainnya" data-status="coming-soon">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder amber-bg">
+              <div class="phone-preview">
+                <div class="phone-preview-inner" style="background: #1a1000; color: #F0C97A;">
+                  <div style="font-size:8px;">☪</div>
+                  <div style="font-size:7px; color:#F0C97A;">Khitanan</div>
+                  <div style="font-size:6px; color:rgba(240,201,122,0.5);">Islami</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-thumb-overlay"></div>
+            <div class="card-type-tag">🕌 Islami</div>
+            <div class="card-badge badge-soon">Segera Hadir</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category cat-amber">Undangan Digital</div>
+            <div class="card-title">Khitanan Islami</div>
+            <div class="card-desc">Template khitanan dengan ornamen islami, kaligrafi Arab, nuansa emas, dan desain yang hangat dan bermakna.</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 5%; background: linear-gradient(90deg, var(--amber), #FCD34D);"></div>
+            </div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 5% · Dalam perencanaan</div>
+            <div class="card-meta">
+              <div class="card-meta-stats">
+                <div class="meta-stat">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Segera
+                </div>
+              </div>
+              <button class="card-action-btn" onclick="openModal('notify')">
+                Notifikasi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Add New Card ─── -->
+        <div class="template-card" data-color="gold" style="border-style: dashed; border-color: rgba(255,255,255,0.1);" onclick="openModal('new-template')">
+          <div class="card-thumb">
+            <div class="card-thumb-placeholder dark-bg" style="background: transparent;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.35;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span style="font-size:14px;font-weight:500;">Tambah Template</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title" style="color: var(--text-muted);">Buat Template Baru</div>
+            <div class="card-desc">Mulai membuat template undangan baru untuk usaha Anda. Pilih kategori dan mulai pengembangan.</div>
+            <div class="card-meta" style="border-top-color: rgba(255,255,255,0.05);">
+              <div style="font-size:13px; color: var(--text-muted);">Klik untuk memulai</div>
+              <button class="card-action-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Buat
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── Quick Actions ─── -->
+    <section id="aksi">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Manajemen</div>
+          <h2 class="section-title">Aksi <span>Cepat</span></h2>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <a href="./Wedding/app" class="qa-card">
+          <div class="qa-icon">👁</div>
+          <div class="qa-label">Pratinjau Template</div>
+          <div class="qa-sublabel">Buka template Wedding Sketch di browser</div>
+        </a>
+        <div class="qa-card" onclick="openModal('new-template')">
+          <div class="qa-icon">✦</div>
+          <div class="qa-label">Buat Template Baru</div>
+          <div class="qa-sublabel">Mulai pengembangan template baru</div>
+        </div>
+        <div class="qa-card" onclick="openModal('duplicate')">
+          <div class="qa-icon">⧉</div>
+          <div class="qa-label">Duplikasi Template</div>
+          <div class="qa-sublabel">Salin template yang ada sebagai basis baru</div>
+        </div>
+        <div class="qa-card" onclick="openModal('share')">
+          <div class="qa-icon">🔗</div>
+          <div class="qa-label">Bagikan Link</div>
+          <div class="qa-sublabel">Salin link demo template untuk klien</div>
+        </div>
+        <div class="qa-card" onclick="openModal('export')">
+          <div class="qa-icon">📦</div>
+          <div class="qa-label">Export Proyek</div>
+          <div class="qa-sublabel">Bungkus file template siap deploy</div>
+        </div>
+        <div class="qa-card" onclick="openModal('settings')">
+          <div class="qa-icon">⚙</div>
+          <div class="qa-label">Pengaturan Studio</div>
+          <div class="qa-sublabel">Kelola branding dan konfigurasi studio</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Features ─── -->
+    <section id="fitur" class="features-section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Keunggulan</div>
+          <h2 class="section-title">Fitur <span>Platform</span></h2>
+        </div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon fi-gold">🎨</div>
+          <div class="feature-title">Multi-Template</div>
+          <div class="feature-desc">Kelola berbagai jenis template undangan — pernikahan, ulang tahun, khitanan, dan lainnya — dalam satu dashboard terpusat.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-rose">📱</div>
+          <div class="feature-title">Mobile-First Design</div>
+          <div class="feature-desc">Setiap template dioptimalkan untuk tampil sempurna di perangkat mobile, dengan layout responsif dan UX yang intuitif.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-teal">⚡</div>
+          <div class="feature-title">React + Vite</div>
+          <div class="feature-desc">Dibangun dengan teknologi modern — React, TypeScript, Tailwind CSS, dan Vite — untuk performa dan kemudahan pengembangan terbaik.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-purple">🔧</div>
+          <div class="feature-title">Mudah Dikustomisasi</div>
+          <div class="feature-desc">Setiap template mudah disesuaikan dengan data klien — nama, foto, tanggal, lokasi, dan rekening — tanpa mengubah kode inti.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA Banner ─── -->
+    <div class="cta-banner">
+      <h2 class="cta-title">Siap Membuat <span>Template Berikutnya?</span></h2>
+      <p class="cta-desc">Perluas koleksi template studio Anda dan hadirkan pengalaman undangan digital yang tak terlupakan untuk setiap klien.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative;">
+        <button class="btn-primary" onclick="openModal('new-template')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Buat Template Baru
+        </button>
+        <a href="./Wedding/app" class="btn-ghost">Lihat Template Wedding →</a>
+      </div>
+    </div>
+
+  </div><!-- /wrapper -->
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="wrapper">
+      <div class="footer-inner">
+        <div class="footer-logo">Rdir <span>Studio</span></div>
+        <div class="footer-copy">© 2025 Rdir Studio · Semua template dibuat dengan ✦</div>
+        <div class="footer-links">
+          <a href="#templates" class="footer-link">Template</a>
+          <a href="#fitur" class="footer-link">Fitur</a>
+          <a href="#aksi" class="footer-link">Aksi Cepat</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── Modals ─── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modal-content">
+      <!-- Content set by JS -->
+    </div>
+  </div>
+
+  <script>
+    /* ─── Filter ─── */
+    function filterTemplates(cat, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.template-card').forEach(card => {
+        const cardCat = card.dataset.cat;
+        if (cat === 'semua' || cardCat === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    /* ─── Modal System ─── */
+    const modals = {
+      'new-template': {
+        title: '✦ Buat Template Baru',
+        desc: 'Tentukan nama dan kategori template yang ingin Anda buat. Tim Anda akan segera memulai pengembangan.',
+        fields: [
+          { placeholder: 'Nama Template (cth: Sakura Bliss)', type: 'text' },
+          { placeholder: 'Kategori (Pernikahan / Ulang Tahun / Lainnya)', type: 'text' },
+          { placeholder: 'Deskripsi singkat template...', type: 'text' },
+        ],
+        btn: 'Buat Template',
+        btnClass: 'primary-action'
+      },
+      'notify': {
+        title: '🔔 Dapatkan Notifikasi',
+        desc: 'Template ini masih dalam pengembangan. Simpan pengingat agar Anda tidak melewatkan saat template ini selesai.',
+        fields: [
+          { placeholder: 'Nama template yang ditunggu', type: 'text' },
+        ],
+        btn: 'Simpan Pengingat',
+        btnClass: ''
+      },
+      'duplicate': {
+        title: '⧉ Duplikasi Template',
+        desc: 'Pilih template yang ingin diduplikasi sebagai dasar template baru Anda.',
+        fields: [
+          { placeholder: 'Template sumber (cth: Wedding Sketch)', type: 'text' },
+          { placeholder: 'Nama template baru', type: 'text' },
+        ],
+        btn: 'Duplikasi Sekarang',
+        btnClass: ''
+      },
+      'share': {
+        title: '🔗 Bagikan Template',
+        desc: 'Salin link demo berikut untuk dikirimkan ke klien Anda.',
+        fields: [
+          { placeholder: 'http://localhost:5173/ (link demo lokal)', type: 'text', readonly: true },
+        ],
+        btn: 'Salin Link',
+        btnClass: ''
+      },
+      'export': {
+        title: '📦 Export Proyek',
+        desc: 'Ekspor template sebagai build siap produksi untuk di-deploy ke hosting Anda.',
+        fields: [
+          { placeholder: 'Pilih template untuk di-export', type: 'text' },
+        ],
+        btn: 'Export Build',
+        btnClass: ''
+      },
+      'settings': {
+        title: '⚙ Pengaturan Studio',
+        desc: 'Kelola informasi branding dan konfigurasi dasar Rdir Studio Anda.',
+        fields: [
+          { placeholder: 'Nama Studio (cth: Rdir Studio)', type: 'text' },
+          { placeholder: 'No. WhatsApp / Kontak', type: 'text' },
+          { placeholder: 'Tagline Studio', type: 'text' },
+        ],
+        btn: 'Simpan Pengaturan',
+        btnClass: ''
+      },
+    };
+
+    function openModal(key) {
+      const m = modals[key];
+      if (!m) return;
+      const fieldsHTML = m.fields.map(f =>
+        `<input class="modal-input" type="${f.type}" placeholder="${f.placeholder}" ${f.readonly ? 'readonly value="'+f.placeholder+'"' : ''} />`
+      ).join('');
+      document.getElementById('modal-content').innerHTML = `
+        <h3 class="modal-title">${m.title}</h3>
+        <p class="modal-desc">${m.desc}</p>
+        ${fieldsHTML}
+        <div class="modal-actions">
+          <button class="btn-close" onclick="closeModal()">Batal</button>
+          <button class="card-action-btn ${m.btnClass}" onclick="handleModalAction('${key}')">${m.btn}</button>
+        </div>
+      `;
+      document.getElementById('modal-overlay').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target.id === 'modal-overlay') closeModal();
+    }
+
+    function handleModalAction(key) {
+      if (key === 'share') {
+        navigator.clipboard.writeText('http://localhost:5173/').catch(() => {});
+      }
+      closeModal();
+      showToast(key);
+    }
+
+    /* ─── Toast ─── */
+    function showToast(key) {
+      const messages = {
+        'new-template': '✦ Template baru berhasil ditambahkan ke daftar!',
+        'notify': '🔔 Pengingat berhasil disimpan.',
+        'duplicate': '⧉ Template berhasil diduplikasi.',
+        'share': '🔗 Link berhasil disalin ke clipboard.',
+        'export': '📦 Export dimulai. Periksa folder build Anda.',
+        'settings': '⚙ Pengaturan berhasil disimpan.',
+      };
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+        background: var(--bg-surface); border: 1px solid rgba(212,168,83,0.3);
+        color: var(--text-primary); padding: 14px 24px;
+        border-radius: 100px; font-size: 14px; font-weight: 500;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        z-index: 9999; animation: fadeInUp 0.3s ease;
+        white-space: nowrap;
+      `;
+      toast.textContent = messages[key] || 'Berhasil!';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    /* ─── Stats Counter Animation ─── */
+    function animateCount(el, target, suffix = '') {
+      if (target === '—') { el.textContent = '—'; return; }
+      let current = 0;
+      const step = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 40);
+    }
+
+    // Animate stats on load
+    setTimeout(() => {
+      animateCount(document.getElementById('stat-templates'), 1);
+      animateCount(document.getElementById('stat-live'), 1);
+    }, 600);
+
+    /* ─── Keyboard shortcut ─── */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openModal('new-template');
+      }
+    });
+  </script>
+</body>
+</html>
