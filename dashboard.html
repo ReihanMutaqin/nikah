@@ -3,119 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rdir Studio — Dashboard Manajemen Template</title>
-  <meta name="description" content="Dashboard pusat manajemen template undangan digital Rdir Studio. Kelola semua template undangan pernikahan, ulang tahun, dan acara spesial Anda dalam satu tempat." />
+  <title>Rdir Studio — Undangan Digital yang Berkesan</title>
+  <meta name="description" content="Undangan pernikahan digital premium dari Rdir Studio. Cantik, elegan, dan berkesan. Pesan sekarang lewat WhatsApp!" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-dark: #0D0D14;
-      --bg-card: #13131F;
-      --bg-card-hover: #1A1A2E;
-      --bg-surface: #1C1C2E;
-      --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(255,255,255,0.15);
-
-      --gold: #D4A853;
-      --gold-light: #F0C97A;
-      --gold-glow: rgba(212, 168, 83, 0.25);
-
-      --rose: #E8748A;
-      --rose-light: #F4A0B0;
-      --rose-glow: rgba(232, 116, 138, 0.2);
-
-      --teal: #4ECDC4;
-      --teal-glow: rgba(78, 205, 196, 0.2);
-
-      --purple: #9B72CF;
-      --purple-glow: rgba(155, 114, 207, 0.2);
-
-      --amber: #F59E0B;
-      --amber-glow: rgba(245, 158, 11, 0.2);
-
-      --text-primary: #F0EEF8;
-      --text-secondary: rgba(240, 238, 248, 0.55);
-      --text-muted: rgba(240, 238, 248, 0.35);
-
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --radius-xl: 32px;
+      --cream:   #FFF8F2;
+      --blush:   #F2D5DC;
+      --rose:    #D4849C;
+      --rose-dk: #B86882;
+      --sage:    #A8BC78;
+      --sage-dk: #7E9452;
+      --gold:    #D9A96A;
+      --gold-lt: #F0CB95;
+      --lav:     #C8B8D8;
+      --warm-dk: #3D2B2B;
+      --warm-md: #6B4E4E;
+      --warm-lt: #9E7878;
+      --card-bg: rgba(255,255,255,0.75);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-primary);
-      min-height: 100vh;
+      background-color: var(--cream);
+      color: var(--warm-dk);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── Noise Texture Overlay ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #FFF0E8; }
+    ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 10px; }
 
-    /* ─── Ambient Glow BG ─── */
-    .ambient-bg {
+    /* ─── Background Blobs ─── */
+    .blob-bg {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
     }
-    .ambient-bg .glow {
+    .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.12;
+      filter: blur(80px);
+      opacity: 0.22;
     }
-    .ambient-bg .glow-1 {
-      width: 600px; height: 600px;
-      background: var(--gold);
-      top: -200px; left: -150px;
-      animation: driftA 18s ease-in-out infinite alternate;
-    }
-    .ambient-bg .glow-2 {
-      width: 500px; height: 500px;
-      background: var(--rose);
-      top: 30%; right: -150px;
-      animation: driftB 22s ease-in-out infinite alternate;
-    }
-    .ambient-bg .glow-3 {
-      width: 400px; height: 400px;
-      background: var(--purple);
-      bottom: -100px; left: 30%;
-      animation: driftA 16s ease-in-out infinite alternate-reverse;
-    }
-    @keyframes driftA {
+    .blob-1 { width: 500px; height: 500px; background: #F2B8C6; top: -100px; left: -100px; animation: blobFloat 14s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: #D4C5E8; top: 30%; right: -100px; animation: blobFloat 18s ease-in-out infinite alternate-reverse; }
+    .blob-3 { width: 350px; height: 350px; background: #B8D4A8; bottom: 10%; left: 20%; animation: blobFloat 16s ease-in-out infinite alternate; }
+    .blob-4 { width: 300px; height: 300px; background: #F0CB95; bottom: -80px; right: 10%; animation: blobFloat 12s ease-in-out infinite alternate-reverse; }
+
+    @keyframes blobFloat {
       from { transform: translate(0, 0) scale(1); }
-      to   { transform: translate(60px, 40px) scale(1.1); }
-    }
-    @keyframes driftB {
-      from { transform: translate(0, 0) scale(1.05); }
-      to   { transform: translate(-50px, 60px) scale(0.95); }
+      to   { transform: translate(40px, 30px) scale(1.08); }
     }
 
-    /* ─── Layout ─── */
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ─── Petals ─── */
+    .petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      font-size: 18px;
+      opacity: 0;
+      animation: petalFall linear infinite;
+    }
+    @keyframes petalFall {
+      0%   { opacity: 0; transform: translateY(-30px) rotate(0deg); }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(720deg); }
     }
 
     /* ─── Navbar ─── */
@@ -123,18 +87,21 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      background: rgba(13, 13, 20, 0.75);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 24px;
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
+    }
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 248, 242, 0.82);
+      border-bottom: 1px solid rgba(212, 132, 156, 0.12);
     }
     .nav-logo {
       display: flex;
@@ -142,1377 +109,1140 @@
       gap: 10px;
       text-decoration: none;
     }
-    .nav-logo-icon {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      border-radius: 10px;
+    .nav-logo-mark {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 0 20px var(--gold-glow);
+      font-size: 16px;
+      box-shadow: 0 4px 16px rgba(212,132,156,0.35);
     }
-    .nav-logo-text {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--text-primary);
-      letter-spacing: -0.3px;
+    .nav-logo-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: var(--rose-dk);
+      font-weight: 600;
     }
-    .nav-logo-text span { color: var(--gold); }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
     }
-    .nav-link {
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      text-decoration: none;
+    .nav-a {
+      padding: 8px 18px;
+      border-radius: 100px;
       font-size: 14px;
       font-weight: 500;
-      transition: all 0.2s ease;
+      color: var(--warm-md);
+      text-decoration: none;
+      transition: all 0.2s;
     }
-    .nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.06); }
-    .nav-btn {
-      padding: 9px 20px;
-      border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #1a1000;
+    .nav-a:hover {
+      background: rgba(212,132,156,0.12);
+      color: var(--rose-dk);
+    }
+    .nav-wa {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
       font-size: 14px;
       font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 20px var(--gold-glow);
       text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
     }
-    .nav-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 28px rgba(212, 168, 83, 0.4);
+    .nav-wa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.4);
     }
 
     /* ─── Hero ─── */
     .hero {
-      padding: 100px 0 80px;
+      position: relative;
+      z-index: 1;
       text-align: center;
+      padding: 90px 24px 80px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px 6px 10px;
-      background: rgba(212, 168, 83, 0.12);
-      border: 1px solid rgba(212, 168, 83, 0.3);
+    .hero-tag {
+      display: inline-block;
+      padding: 7px 20px;
       border-radius: 100px;
-      font-size: 13px;
+      background: rgba(212,132,156,0.12);
+      border: 1px solid rgba(212,132,156,0.3);
+      font-size: 13.5px;
+      color: var(--rose-dk);
       font-weight: 500;
-      color: var(--gold-light);
       margin-bottom: 28px;
-      animation: fadeInDown 0.6s ease both;
-    }
-    .hero-badge .dot {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--gold);
-      animation: pulse 2s ease infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.8); }
+      animation: slideDown 0.6s ease both;
     }
     .hero-title {
-      font-size: clamp(42px, 7vw, 80px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 24px;
-      animation: fadeInUp 0.7s 0.1s ease both;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 1.1;
+      color: var(--warm-dk);
+      margin-bottom: 16px;
+      animation: slideUp 0.7s 0.1s ease both;
     }
-    .hero-title .line2 {
+    .hero-title .script {
       display: block;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--rose-light) 100%);
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(44px, 8vw, 88px);
+      background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 50%, var(--rose-dk) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1.15;
     }
-    .hero-subtitle {
-      font-size: clamp(16px, 2vw, 19px);
-      color: var(--text-secondary);
-      max-width: 560px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--warm-md);
+      line-height: 1.75;
+      max-width: 580px;
+      margin: 0 auto 44px;
       font-weight: 400;
-      animation: fadeInUp 0.7s 0.2s ease both;
+      animation: slideUp 0.7s 0.2s ease both;
     }
-    .hero-actions {
+    .hero-btns {
       display: flex;
-      align-items: center;
+      gap: 14px;
       justify-content: center;
-      gap: 16px;
       flex-wrap: wrap;
-      animation: fadeInUp 0.7s 0.3s ease both;
+      animation: slideUp 0.7s 0.3s ease both;
     }
-    .btn-primary {
+    .btn-main {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #1a1000;
-      border-radius: var(--radius-md);
-      font-weight: 700;
+      padding: 15px 32px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-dk));
+      color: white;
       font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
       border: none;
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 32px var(--gold-glow);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 28px rgba(212,132,156,0.4);
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(212, 168, 83, 0.45);
+    .btn-main:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(212,132,156,0.5);
     }
-    .btn-ghost {
+    .btn-outline {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 28px;
-      background: rgba(255,255,255,0.06);
-      color: var(--text-primary);
-      border-radius: var(--radius-md);
-      font-weight: 600;
+      padding: 15px 32px;
+      border-radius: 100px;
+      background: white;
+      color: var(--rose-dk);
       font-size: 15px;
-      border: 1px solid var(--border);
-      cursor: pointer;
+      font-weight: 600;
       text-decoration: none;
-      transition: all 0.25s ease;
+      border: 2px solid rgba(212,132,156,0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: var(--border-hover);
+    .btn-outline:hover {
+      border-color: var(--rose);
+      background: rgba(212,132,156,0.06);
       transform: translateY(-2px);
     }
 
-    /* ─── Stats Strip ─── */
-    .stats-strip {
+    /* ─── Floating Stats ─── */
+    .hero-stats {
       display: flex;
       justify-content: center;
-      gap: 60px;
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      gap: 32px;
       flex-wrap: wrap;
-      margin-bottom: 80px;
-      animation: fadeIn 0.8s 0.5s ease both;
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px dashed rgba(212,132,156,0.25);
+      animation: slideUp 0.8s 0.4s ease both;
     }
-    .stat-item { text-align: center; }
-    .stat-number {
-      font-size: 42px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .stat-box {
+      text-align: center;
     }
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
+    .stat-num {
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 12.5px;
+      color: var(--warm-lt);
       margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
-    /* ─── Section Headers ─── */
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      gap: 16px;
+    /* ─── Section Wrapper ─── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
     }
-    .section-label {
-      font-size: 12px;
+
+    /* ─── Section Label ─── */
+    .sec-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--gold);
-      margin-bottom: 8px;
+      color: var(--rose);
+      margin-bottom: 12px;
     }
-    .section-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.8px;
+    .sec-label::before, .sec-label::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--rose);
+      opacity: 0.4;
     }
-    .section-title span { color: var(--gold); }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      color: var(--warm-dk);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .sec-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
+    .sec-desc {
+      font-size: 15.5px;
+      color: var(--warm-md);
+      line-height: 1.75;
+      max-width: 520px;
+    }
+    .sec-header {
+      margin-bottom: 52px;
+    }
+    .sec-header.center {
+      text-align: center;
+    }
+    .sec-header.center .sec-label { justify-content: center; }
+    .sec-header.center .sec-desc { margin: 0 auto; }
 
-    /* ─── Filter Bar ─── */
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+    /* ─── Wavy Divider ─── */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      position: relative;
+      z-index: 1;
     }
-    .filter-chip {
-      padding: 7px 18px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .filter-chip:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-    .filter-chip.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #1a1000;
-      font-weight: 600;
-    }
+    .wave-divider svg { display: block; }
 
-    /* ─── Template Grid ─── */
-    .template-grid {
+    /* ─── Template Cards Grid ─── */
+    .templates-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 24px;
-      margin-bottom: 80px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
     }
 
     /* ─── Template Card ─── */
-    .template-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+    .t-card {
+      background: var(--card-bg);
+      border-radius: 24px;
       overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1.5px solid rgba(212,132,156,0.12);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
       position: relative;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-      animation: fadeInUp 0.5s ease both;
+      animation: fadeRise 0.6s ease both;
     }
-    .template-card:nth-child(1) { animation-delay: 0.05s; }
-    .template-card:nth-child(2) { animation-delay: 0.1s; }
-    .template-card:nth-child(3) { animation-delay: 0.15s; }
-    .template-card:nth-child(4) { animation-delay: 0.2s; }
-    .template-card:nth-child(5) { animation-delay: 0.25s; }
-    .template-card:nth-child(6) { animation-delay: 0.3s; }
-    .template-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-6px);
-      background: var(--bg-card-hover);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    .t-card:nth-child(1) { animation-delay: 0.05s; }
+    .t-card:nth-child(2) { animation-delay: 0.12s; }
+    .t-card:nth-child(3) { animation-delay: 0.19s; }
+    .t-card:hover {
+      transform: translateY(-10px) scale(1.015);
+      border-color: rgba(212,132,156,0.35);
+      box-shadow: 0 28px 60px rgba(180,100,130,0.18), 0 8px 20px rgba(180,100,130,0.1);
     }
 
-    /* Card Glow on Hover */
-    .template-card[data-color="gold"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--gold-glow); border-color: rgba(212,168,83,0.3); }
-    .template-card[data-color="rose"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--rose-glow); border-color: rgba(232,116,138,0.3); }
-    .template-card[data-color="teal"]:hover  { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--teal-glow); border-color: rgba(78,205,196,0.3); }
-    .template-card[data-color="purple"]:hover{ box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--purple-glow); border-color: rgba(155,114,207,0.3); }
-    .template-card[data-color="amber"]:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--amber-glow); border-color: rgba(245,158,11,0.3); }
-
-    /* Card Thumbnail */
-    .card-thumb {
+    /* Card Preview */
+    .t-preview {
+      height: 240px;
       position: relative;
-      height: 200px;
       overflow: hidden;
-    }
-    .card-thumb-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .template-card:hover .card-thumb-bg { transform: scale(1.05); }
-    .card-thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(13,13,20,0.85) 100%);
-    }
-    .card-thumb-placeholder {
-      width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 64px;
-      position: relative;
     }
-    .card-thumb-placeholder.gold-bg   { background: linear-gradient(135deg, #2A1F00, #3D2D00); }
-    .card-thumb-placeholder.rose-bg   { background: linear-gradient(135deg, #2A0A12, #3D1020); }
-    .card-thumb-placeholder.teal-bg   { background: linear-gradient(135deg, #002A28, #003D3A); }
-    .card-thumb-placeholder.purple-bg { background: linear-gradient(135deg, #1A0A2E, #250D42); }
-    .card-thumb-placeholder.amber-bg  { background: linear-gradient(135deg, #2A1A00, #3D2500); }
-    .card-thumb-placeholder.dark-bg   { background: linear-gradient(135deg, #0D0D20, #15152D); }
-
-    /* Preview Screen inside placeholder */
-    .phone-preview {
-      position: absolute;
-      width: 80px; height: 145px;
-      background: #0D0D14;
-      border-radius: 12px;
-      border: 2px solid rgba(255,255,255,0.15);
+    .t-preview-phone {
+      width: 100px; height: 175px;
+      background: #FFF8F2;
+      border-radius: 18px;
+      border: 2px solid rgba(212,132,156,0.25);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(255,255,255,0.8);
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-    .phone-preview-inner {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 4px;
-      font-size: 7px;
-      text-align: center;
+      padding: 10px 6px;
       gap: 4px;
     }
-
-    /* Badges on card */
-    .card-badge {
+    .phone-notch {
       position: absolute;
-      top: 14px;
-      right: 14px;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
+      top: 6px;
+      width: 30px; height: 5px;
+      background: rgba(212,132,156,0.25);
+      border-radius: 10px;
     }
-    .badge-live    { background: rgba(78,205,196,0.2); color: var(--teal); border: 1px solid rgba(78,205,196,0.35); }
-    .badge-soon    { background: rgba(245,158,11,0.2); color: var(--amber); border: 1px solid rgba(245,158,11,0.35); }
-    .badge-draft   { background: rgba(255,255,255,0.08); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.15); }
-    .badge-new     { background: rgba(232,116,138,0.2); color: var(--rose); border: 1px solid rgba(232,116,138,0.35); }
-    .badge-popular { background: rgba(212,168,83,0.2); color: var(--gold); border: 1px solid rgba(212,168,83,0.35); }
 
-    /* Card Type tag */
-    .card-type-tag {
+    /* Preview BG gradients */
+    .prev-1 { background: linear-gradient(135deg, #FDE8EE 0%, #F2F8E8 50%, #FFF0DC 100%); }
+    .prev-2 { background: linear-gradient(135deg, #E8EEF8 0%, #F8E8F2 50%, #F0ECF8 100%); }
+    .prev-3 { background: linear-gradient(135deg, #F8F2E0 0%, #F5ECE0 50%, #F0E8D8 100%); }
+    .prev-coming { background: linear-gradient(135deg, #F0F0F5 0%, #E8E8F0 100%); }
+
+    /* Decorative circles in preview */
+    .prev-deco {
       position: absolute;
-      top: 14px;
-      left: 14px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(8px);
-      color: var(--text-secondary);
-      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      opacity: 0.2;
     }
 
     /* Card Body */
-    .card-body { padding: 20px 22px 22px; }
-    .card-category {
-      font-size: 11px;
+    .t-body { padding: 22px 24px 26px; }
+    .t-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11.5px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+    .tag-live { background: rgba(79,192,141,0.12); color: #2E8B5A; }
+    .tag-soon { background: rgba(212,132,156,0.12); color: var(--rose-dk); }
+    .t-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--warm-dk);
       margin-bottom: 8px;
     }
-    .cat-gold   { color: var(--gold); }
-    .cat-rose   { color: var(--rose); }
-    .cat-teal   { color: var(--teal); }
-    .cat-purple { color: var(--purple); }
-    .cat-amber  { color: var(--amber); }
-
-    .card-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-    .card-desc {
+    .t-desc {
       font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 18px;
+      color: var(--warm-lt);
+      line-height: 1.65;
+      margin-bottom: 20px;
     }
-
-    /* Card Meta */
-    .card-meta {
+    .t-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+    .t-feat {
+      padding: 4px 11px;
+      border-radius: 100px;
+      background: rgba(212,132,156,0.08);
+      border: 1px solid rgba(212,132,156,0.15);
+      font-size: 12px;
+      color: var(--rose-dk);
+      font-weight: 500;
+    }
+    .t-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      border-top: 1px dashed rgba(212,132,156,0.18);
     }
-    .card-meta-stats {
-      display: flex;
-      gap: 16px;
+    .t-price {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: var(--rose);
+      font-weight: 600;
     }
-    .meta-stat {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12.5px;
-      color: var(--text-muted);
+    .t-price-note {
+      font-size: 11px;
+      color: var(--warm-lt);
+      margin-top: 1px;
     }
-    .meta-stat svg { opacity: 0.6; }
-
-    .card-action-btn {
+    .t-btn {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--text-secondary);
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .card-action-btn:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-primary);
-      border-color: var(--border-hover);
-    }
-    .card-action-btn.primary-action {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #1a1000;
-      border-color: transparent;
-    }
-    .card-action-btn.primary-action:hover {
-      box-shadow: 0 4px 20px var(--gold-glow);
-      transform: translateY(-1px);
-    }
-
-    /* ─── Coming Soon Card ─── */
-    .template-card.coming-soon {
-      opacity: 0.65;
-      cursor: default;
-    }
-    .template-card.coming-soon:hover {
-      transform: translateY(-2px);
-      box-shadow: none;
-    }
-
-    /* ─── Feature Showcase ─── */
-    .features-section { padding: 80px 0; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      transition: all 0.3s ease;
-      animation: fadeInUp 0.5s ease both;
-    }
-    .feature-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-    }
-    .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-    .fi-gold   { background: rgba(212,168,83,0.15); }
-    .fi-rose   { background: rgba(232,116,138,0.15); }
-    .fi-teal   { background: rgba(78,205,196,0.15); }
-    .fi-purple { background: rgba(155,114,207,0.15); }
-    .feature-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .feature-desc {
+      padding: 10px 22px;
+      border-radius: 100px;
       font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ─── Quick Actions ─── */
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      padding: 48px 0 80px;
-    }
-    .qa-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-decoration: none;
-      color: inherit;
-    }
-    .qa-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-    }
-    .qa-icon { font-size: 28px; }
-    .qa-label {
-      font-size: 15px;
       font-weight: 600;
-      color: var(--text-primary);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
     }
-    .qa-sublabel {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
+    .t-btn-live {
+      background: linear-gradient(135deg, var(--rose), var(--rose-dk));
+      color: white;
+      box-shadow: 0 4px 18px rgba(212,132,156,0.4);
+    }
+    .t-btn-live:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212,132,156,0.5);
+    }
+    .t-btn-soon {
+      background: rgba(212,132,156,0.1);
+      color: var(--rose-dk);
+      border: 1.5px solid rgba(212,132,156,0.25);
+    }
+    .t-btn-soon:hover {
+      background: rgba(212,132,156,0.18);
     }
 
-    /* ─── CTA Banner ─── */
-    .cta-banner {
-      background: var(--bg-card);
-      border: 1px solid rgba(212,168,83,0.2);
-      border-radius: var(--radius-xl);
-      padding: 64px 48px;
-      text-align: center;
-      margin-bottom: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-banner::before {
-      content: '';
+    /* Card ribbon */
+    .card-ribbon {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,83,0.12) 0%, transparent 70%);
+      top: 18px;
+      left: -2px;
+      padding: 5px 14px 5px 12px;
+      background: linear-gradient(135deg, #4FC28D, #2E8B5A);
+      color: white;
+      font-size: 11.5px;
+      font-weight: 700;
+      border-radius: 0 100px 100px 0;
+      box-shadow: 0 4px 12px rgba(79,192,141,0.4);
+      letter-spacing: 0.5px;
+      z-index: 3;
     }
-    .cta-title {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
+    .ribbon-soon {
+      background: linear-gradient(135deg, var(--lav), #9B84C0);
+      box-shadow: 0 4px 12px rgba(155,132,192,0.4);
+    }
+
+    /* ─── Section: How It Works ─── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+    }
+    .step-card {
+      text-align: center;
+      padding: 36px 24px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 1.5px solid rgba(212,132,156,0.1);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
       position: relative;
+      animation: fadeRise 0.5s ease both;
     }
-    .cta-title span {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    .step-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,132,156,0.25);
+      box-shadow: 0 20px 48px rgba(180,100,130,0.12);
+    }
+    .step-num {
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--blush), var(--rose));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1;
+      margin-bottom: 14px;
     }
-    .cta-desc {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 480px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
+    .step-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--warm-dk);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 13.5px;
+      color: var(--warm-lt);
+      line-height: 1.65;
+    }
+    .step-connector {
+      position: absolute;
+      top: 50%; right: -18px;
+      transform: translateY(-50%);
+      font-size: 20px;
+      opacity: 0.25;
+      z-index: 2;
+    }
+
+    /* ─── Testimonials ─── */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .testi-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1.5px solid rgba(212,132,156,0.1);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
       position: relative;
+      overflow: hidden;
+    }
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px; left: 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 100px;
+      color: rgba(212,132,156,0.08);
+      line-height: 1;
+      font-style: italic;
+    }
+    .testi-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,132,156,0.25);
+      box-shadow: 0 16px 40px rgba(180,100,130,0.12);
+    }
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+    .star { font-size: 15px; }
+    .testi-text {
+      font-size: 14px;
+      color: var(--warm-md);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testi-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+    .av-1 { background: linear-gradient(135deg, #F2A8B8, var(--rose)); }
+    .av-2 { background: linear-gradient(135deg, var(--lav), #9B84C0); }
+    .av-3 { background: linear-gradient(135deg, #A8D4A8, var(--sage-dk)); }
+    .testi-name { font-size: 14px; font-weight: 600; color: var(--warm-dk); }
+    .testi-date { font-size: 12px; color: var(--warm-lt); margin-top: 2px; }
+
+    /* ─── CTA Section ─── */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 100px 24px;
+      overflow: hidden;
+    }
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(242,213,220,0.6) 0%, rgba(255,248,242,0.4) 50%, rgba(217,169,106,0.2) 100%);
+    }
+    .cta-deco {
+      position: absolute;
+      pointer-events: none;
+    }
+    .cta-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(36px, 6vw, 60px);
+      color: var(--warm-dk);
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+    .cta-title span { color: var(--rose-dk); }
+    .cta-desc {
+      font-size: 16px;
+      color: var(--warm-md);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 10px 36px rgba(37,211,102,0.4);
+    }
+    .wa-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 18px 48px rgba(37,211,102,0.5);
+    }
+    .wa-icon { font-size: 22px; }
+
+    /* ─── Features Strip ─── */
+    .features-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 48px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .feat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 100px;
+      background: var(--card-bg);
+      border: 1.5px solid rgba(212,132,156,0.12);
+      font-size: 13.5px;
+      color: var(--warm-md);
+      font-weight: 500;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+    }
+    .feat-pill:hover {
+      border-color: rgba(212,132,156,0.3);
+      color: var(--rose-dk);
+      transform: translateY(-2px);
     }
 
     /* ─── Footer ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
+      position: relative;
+      z-index: 1;
+      background: rgba(255,248,242,0.8);
+      border-top: 1px solid rgba(212,132,156,0.1);
+      padding: 48px 24px 36px;
+      text-align: center;
     }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
+    .footer-logo-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 30px;
+      color: var(--rose-dk);
+      margin-bottom: 16px;
+      font-weight: 600;
     }
-    .footer-logo {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .footer-logo span { color: var(--gold); }
-    .footer-copy {
-      font-size: 13px;
-      color: var(--text-muted);
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--warm-lt);
+      margin-bottom: 28px;
     }
     .footer-links {
       display: flex;
-      gap: 20px;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
     }
     .footer-link {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 14px;
+      color: var(--warm-md);
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: color 0.2s;
     }
-    .footer-link:hover { color: var(--text-primary); }
+    .footer-link:hover { color: var(--rose); }
+    .footer-copy {
+      font-size: 12.5px;
+      color: var(--warm-lt);
+    }
+    .footer-hearts { color: var(--rose); }
 
-    /* ─── Keyframes ─── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* ─── Mobile ─── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero { padding: 72px 0 60px; }
-      .stats-strip { gap: 32px; }
-      .template-grid { grid-template-columns: 1fr; }
-      .section-header { flex-direction: column; align-items: flex-start; }
-      .cta-banner { padding: 48px 24px; }
-      .cta-title { font-size: 28px; }
-      .footer-inner { flex-direction: column; text-align: center; }
-    }
-
-    /* ─── Scrollbar ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: rgba(212,168,83,0.3); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(212,168,83,0.5); }
-
-    /* ─── Modal ─── */
-    .modal-overlay {
+    /* ─── Floating WA button ─── */
+    .float-wa {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
+      bottom: 28px;
+      right: 24px;
+      z-index: 200;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      font-size: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+      transition: all 0.3s;
+      animation: floatWA 3s ease-in-out infinite;
     }
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
+    .float-wa:hover {
+      transform: scale(1.12);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.6);
     }
-    .modal {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 40px;
-      max-width: 500px;
-      width: 100%;
-      transform: scale(0.9) translateY(20px);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    @keyframes floatWA {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
-    .modal-overlay.open .modal {
-      transform: scale(1) translateY(0);
-    }
-    .modal-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .modal-desc {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-    .modal-input {
-      width: 100%;
-      padding: 12px 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      margin-bottom: 12px;
-      transition: border-color 0.2s ease;
-    }
-    .modal-input:focus {
-      outline: none;
-      border-color: rgba(212,168,83,0.5);
-    }
-    .modal-input::placeholder { color: var(--text-muted); }
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-    .btn-close {
-      padding: 10px 22px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Outfit', sans-serif;
-    }
-    .btn-close:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-
-    /* Tooltip */
-    .tooltip-wrapper { position: relative; display: inline-block; }
-    .tooltip-tip {
+    .float-wa-tooltip {
       position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      color: var(--text-secondary);
+      right: 66px;
       white-space: nowrap;
-      pointer-events: none;
+      background: #1a1a1a;
+      color: white;
+      font-size: 12.5px;
+      font-family: 'Outfit', sans-serif;
+      padding: 7px 14px;
+      border-radius: 100px;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      pointer-events: none;
+      transition: opacity 0.2s;
     }
-    .tooltip-wrapper:hover .tooltip-tip { opacity: 1; }
+    .float-wa:hover .float-wa-tooltip { opacity: 1; }
 
-    /* Progress bar */
-    .progress-bar {
-      height: 4px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-top: 12px;
+    /* ─── Keyframes ─── */
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .progress-fill {
-      height: 100%;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      transition: width 1s ease;
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRise {
+      from { opacity: 0; transform: translateY(28px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Notification dot */
-    .notif-dot {
-      width: 8px; height: 8px;
-      background: var(--rose);
-      border-radius: 50%;
-      position: absolute;
-      top: -2px; right: -2px;
-      box-shadow: 0 0 8px var(--rose);
-      animation: pulse 2s ease infinite;
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .templates-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .step-connector { display: none; }
+    }
+
+    /* ─── Section BG alternates ─── */
+    .bg-blush {
+      background: linear-gradient(180deg, var(--cream) 0%, #FFF0F5 50%, var(--cream) 100%);
+    }
+    .bg-sage {
+      background: linear-gradient(180deg, var(--cream) 0%, #F5FAF0 50%, var(--cream) 100%);
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Background -->
-  <div class="ambient-bg">
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <div class="glow glow-3"></div>
+  <!-- Blob Background -->
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
   </div>
 
-  <!-- ─── Navigation ─── -->
-  <nav>
-    <div class="nav-inner">
+  <!-- Floating Petals -->
+  <div class="petal" style="left:8%; animation-duration:9s; animation-delay:0s; font-size:14px;">🌸</div>
+  <div class="petal" style="left:22%; animation-duration:13s; animation-delay:2s; font-size:10px;">🌺</div>
+  <div class="petal" style="left:65%; animation-duration:11s; animation-delay:4s; font-size:16px;">🌸</div>
+  <div class="petal" style="left:80%; animation-duration:8s; animation-delay:1s; font-size:12px;">✿</div>
+  <div class="petal" style="left:45%; animation-duration:14s; animation-delay:6s; font-size:11px;">🌸</div>
+  <div class="petal" style="left:90%; animation-duration:10s; animation-delay:3s; font-size:13px;">🌺</div>
+
+  <!-- ─── Navbar ─── -->
+  <div class="nav-wrap">
+    <nav>
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon">✦</div>
-        <span class="nav-logo-text">Rdir <span>Studio</span></span>
+        <div class="nav-logo-mark">✦</div>
+        <span class="nav-logo-name">Rdir Studio</span>
       </a>
       <div class="nav-links">
-        <a href="#templates" class="nav-link">Template</a>
-        <a href="#fitur" class="nav-link">Fitur</a>
-        <a href="#aksi" class="nav-link">Quick Actions</a>
-        <div class="tooltip-wrapper" style="position:relative;">
-          <a href="#" class="nav-link" style="position:relative;">
-            Notifikasi
-            <span class="notif-dot"></span>
-          </a>
-          <span class="tooltip-tip">3 template baru tersedia</span>
-        </div>
+        <a href="#template" class="nav-a">Template</a>
+        <a href="#cara-pesan" class="nav-a">Cara Pesan</a>
+        <a href="#ulasan" class="nav-a">Ulasan</a>
       </div>
-      <button class="nav-btn" onclick="openModal('new-template')">+ Buat Template</button>
-    </div>
-  </nav>
+      <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%2C%20saya%20ingin%20pesan%20undangan%20digital%20😊" target="_blank" class="nav-wa">
+        <span>💬</span> Pesan Sekarang
+      </a>
+    </nav>
+  </div>
 
-  <!-- ─── Main Content ─── -->
-  <div class="wrapper">
-
-    <!-- ─── Hero ─── -->
-    <section class="hero">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Platform Aktif · 1 Template Live
-      </div>
-      <h1 class="hero-title">
-        Dashboard <br>
-        <span class="line2">Rdir Studio</span>
-      </h1>
-      <p class="hero-subtitle">
-        Pusat manajemen semua template undangan digital Anda. 
-        Kelola, pratinjau, dan bagikan dalam satu platform yang elegan.
-      </p>
-      <div class="hero-actions">
-        <a href="#templates" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-          Lihat Semua Template
-        </a>
-        <button class="btn-ghost" onclick="openModal('new-template')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Tambah Template Baru
-        </button>
-      </div>
-    </section>
-
-    <!-- ─── Stats ─── -->
-    <div class="stats-strip">
-      <div class="stat-item">
-        <div class="stat-number" id="stat-templates">1</div>
-        <div class="stat-label">Template Dibuat</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="stat-live">1</div>
-        <div class="stat-label">Template Live</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="stat-views">—</div>
-        <div class="stat-label">Total Tayangan</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="stat-orders">—</div>
-        <div class="stat-label">Pesanan Masuk</div>
-      </div>
+  <!-- ─── Hero ─── -->
+  <section class="hero">
+    <div class="hero-tag">✦ Undangan Digital Premium</div>
+    <h1 class="hero-title">
+      Undangan Pernikahan
+      <span class="script">yang Berkesan</span>
+    </h1>
+    <p class="hero-sub">
+      Ceritakan kisah cinta Anda lewat undangan digital yang cantik, elegan, dan mudah dibagikan ke semua tamu undangan.
+    </p>
+    <div class="hero-btns">
+      <a href="#template" class="btn-main">
+        ✨ Lihat Template
+      </a>
+      <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%2C%20saya%20ingin%20tanya%20tentang%20undangan%20digital%20😊" target="_blank" class="btn-outline">
+        💬 Tanya Dulu
+      </a>
     </div>
 
-    <!-- ─── Template Gallery ─── -->
-    <section id="templates">
-      <div class="section-header">
-        <div>
-          <div class="section-label">Koleksi Template</div>
-          <h2 class="section-title">Semua <span>Template</span> Anda</h2>
-        </div>
-        <div class="filter-bar">
-          <button class="filter-chip active" onclick="filterTemplates('semua', this)">Semua</button>
-          <button class="filter-chip" onclick="filterTemplates('pernikahan', this)">Pernikahan</button>
-          <button class="filter-chip" onclick="filterTemplates('ulang-tahun', this)">Ulang Tahun</button>
-          <button class="filter-chip" onclick="filterTemplates('lainnya', this)">Lainnya</button>
-        </div>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-num">50+</div>
+        <div class="stat-lbl">Pasangan Bahagia</div>
       </div>
-
-      <div class="template-grid" id="template-grid">
-
-        <!-- ─── Template 1: Wedding Sketch ─── -->
-        <div class="template-card" data-color="gold" data-cat="pernikahan" data-status="live">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder gold-bg">
-              <!-- Phone Preview -->
-              <div class="phone-preview">
-                <div class="phone-preview-inner" style="background: #F8F5F0; color: #4A4A4A;">
-                  <div style="font-family:'Dancing Script',cursive; font-size:9px; color:#D4849C;">Sarah & Ahmad</div>
-                  <div style="font-size:6px; color:#A3B565; letter-spacing:1px;">WEDDING</div>
-                  <div style="width:40px; height:1px; background:#A3B565; margin:3px 0;"></div>
-                  <div style="font-size:5px; color:#4A4A4A;">12 · 12 · 2025</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-thumb-overlay"></div>
-            <div class="card-type-tag">💒 Pernikahan</div>
-            <div class="card-badge badge-live">● Live</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category cat-gold">Undangan Digital</div>
-            <div class="card-title">Wedding Sketch</div>
-            <div class="card-desc">Template pernikahan bergaya sketsa artistik dengan palet cream, pink, dan olive. Dilengkapi splash screen, countdown, galeri, dan RSVP.</div>
-            <div class="progress-bar" title="Progress pengembangan">
-              <div class="progress-fill" style="width: 100%;"></div>
-            </div>
-            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 100% selesai</div>
-            <div class="card-meta">
-              <div class="card-meta-stats">
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                  12 Section
-                </div>
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/></svg>
-                  React + TS
-                </div>
-              </div>
-              <a href="/wedding/" class="card-action-btn primary-action">
-                Buka
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Template 2: Elegant Floral (Coming Soon) ─── -->
-        <div class="template-card coming-soon" data-color="rose" data-cat="pernikahan" data-status="coming-soon">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder rose-bg">
-              <div class="phone-preview">
-                <div class="phone-preview-inner" style="background: #1a0510; color: #F4A0B0;">
-                  <div style="font-size:8px;">🌸</div>
-                  <div style="font-size:7px; color:#F4A0B0;">Elegant</div>
-                  <div style="font-size:6px; color:rgba(244,160,176,0.5);">Floral</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-thumb-overlay"></div>
-            <div class="card-type-tag">💒 Pernikahan</div>
-            <div class="card-badge badge-soon">Segera Hadir</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category cat-rose">Undangan Digital</div>
-            <div class="card-title">Elegant Floral</div>
-            <div class="card-desc">Template pernikahan mewah dengan ilustrasi bunga watercolor, tipografi serif klasik, dan animasi petal jatuh yang romantis.</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 20%; background: linear-gradient(90deg, var(--rose), var(--rose-light));"></div>
-            </div>
-            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 20% · Dalam perencanaan</div>
-            <div class="card-meta">
-              <div class="card-meta-stats">
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  Segera
-                </div>
-              </div>
-              <button class="card-action-btn" onclick="openModal('notify')">
-                Notifikasi
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Template 3: Modern Minimalis (Coming Soon) ─── -->
-        <div class="template-card coming-soon" data-color="teal" data-cat="pernikahan" data-status="coming-soon">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder teal-bg">
-              <div class="phone-preview">
-                <div class="phone-preview-inner" style="background: #001a1a; color: #4ECDC4;">
-                  <div style="font-size:8px;">◆</div>
-                  <div style="font-size:7px; color:#4ECDC4;">Modern</div>
-                  <div style="font-size:6px; color:rgba(78,205,196,0.5);">Minimal</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-thumb-overlay"></div>
-            <div class="card-type-tag">💒 Pernikahan</div>
-            <div class="card-badge badge-soon">Segera Hadir</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category cat-teal">Undangan Digital</div>
-            <div class="card-title">Modern Minimalis</div>
-            <div class="card-desc">Template pernikahan bertema gelap modern dengan aksen teal, layout bersih, dan animasi halus yang kontemporer.</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 10%; background: linear-gradient(90deg, var(--teal), #7FFFD4);"></div>
-            </div>
-            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 10% · Dalam perencanaan</div>
-            <div class="card-meta">
-              <div class="card-meta-stats">
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  Segera
-                </div>
-              </div>
-              <button class="card-action-btn" onclick="openModal('notify')">
-                Notifikasi
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Template 4: Birthday Glam ─── -->
-        <div class="template-card coming-soon" data-color="purple" data-cat="ulang-tahun" data-status="coming-soon">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder purple-bg">
-              <div class="phone-preview">
-                <div class="phone-preview-inner" style="background: #100520; color: #C4A0F0;">
-                  <div style="font-size:8px;">🎂</div>
-                  <div style="font-size:7px; color:#C4A0F0;">Birthday</div>
-                  <div style="font-size:6px; color:rgba(196,160,240,0.5);">Glam</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-thumb-overlay"></div>
-            <div class="card-type-tag">🎂 Ulang Tahun</div>
-            <div class="card-badge badge-soon">Segera Hadir</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category cat-purple">Undangan Digital</div>
-            <div class="card-title">Birthday Glam</div>
-            <div class="card-desc">Template ulang tahun mewah dengan efek glitter, konfeti animasi, countdown hari-H, dan RSVP interaktif untuk acara spesial.</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 5%; background: linear-gradient(90deg, var(--purple), #C4A0F0);"></div>
-            </div>
-            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 5% · Dalam perencanaan</div>
-            <div class="card-meta">
-              <div class="card-meta-stats">
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  Segera
-                </div>
-              </div>
-              <button class="card-action-btn" onclick="openModal('notify')">
-                Notifikasi
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Template 5: Khitanan Islami ─── -->
-        <div class="template-card coming-soon" data-color="amber" data-cat="lainnya" data-status="coming-soon">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder amber-bg">
-              <div class="phone-preview">
-                <div class="phone-preview-inner" style="background: #1a1000; color: #F0C97A;">
-                  <div style="font-size:8px;">☪</div>
-                  <div style="font-size:7px; color:#F0C97A;">Khitanan</div>
-                  <div style="font-size:6px; color:rgba(240,201,122,0.5);">Islami</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-thumb-overlay"></div>
-            <div class="card-type-tag">🕌 Islami</div>
-            <div class="card-badge badge-soon">Segera Hadir</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category cat-amber">Undangan Digital</div>
-            <div class="card-title">Khitanan Islami</div>
-            <div class="card-desc">Template khitanan dengan ornamen islami, kaligrafi Arab, nuansa emas, dan desain yang hangat dan bermakna.</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 5%; background: linear-gradient(90deg, var(--amber), #FCD34D);"></div>
-            </div>
-            <div style="font-size:11px; color: var(--text-muted); margin-top:6px;">Progress: 5% · Dalam perencanaan</div>
-            <div class="card-meta">
-              <div class="card-meta-stats">
-                <div class="meta-stat">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  Segera
-                </div>
-              </div>
-              <button class="card-action-btn" onclick="openModal('notify')">
-                Notifikasi
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ─── Add New Card ─── -->
-        <div class="template-card" data-color="gold" style="border-style: dashed; border-color: rgba(255,255,255,0.1);" onclick="openModal('new-template')">
-          <div class="card-thumb">
-            <div class="card-thumb-placeholder dark-bg" style="background: transparent;">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.35;">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span style="font-size:14px;font-weight:500;">Tambah Template</span>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-title" style="color: var(--text-muted);">Buat Template Baru</div>
-            <div class="card-desc">Mulai membuat template undangan baru untuk usaha Anda. Pilih kategori dan mulai pengembangan.</div>
-            <div class="card-meta" style="border-top-color: rgba(255,255,255,0.05);">
-              <div style="font-size:13px; color: var(--text-muted);">Klik untuk memulai</div>
-              <button class="card-action-btn">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Buat
-              </button>
-            </div>
-          </div>
-        </div>
-
+      <div class="stat-box">
+        <div class="stat-num">5★</div>
+        <div class="stat-lbl">Rating Pelanggan</div>
       </div>
-    </section>
-
-    <!-- ─── Quick Actions ─── -->
-    <section id="aksi">
-      <div class="section-header">
-        <div>
-          <div class="section-label">Manajemen</div>
-          <h2 class="section-title">Aksi <span>Cepat</span></h2>
-        </div>
+      <div class="stat-box">
+        <div class="stat-num">24j</div>
+        <div class="stat-lbl">Respons WhatsApp</div>
       </div>
-      <div class="quick-actions">
-        <a href="/wedding/" class="qa-card">
-          <div class="qa-icon">👁</div>
-          <div class="qa-label">Pratinjau Template</div>
-          <div class="qa-sublabel">Buka template Wedding Sketch di browser</div>
-        </a>
-        <div class="qa-card" onclick="openModal('new-template')">
-          <div class="qa-icon">✦</div>
-          <div class="qa-label">Buat Template Baru</div>
-          <div class="qa-sublabel">Mulai pengembangan template baru</div>
-        </div>
-        <div class="qa-card" onclick="openModal('duplicate')">
-          <div class="qa-icon">⧉</div>
-          <div class="qa-label">Duplikasi Template</div>
-          <div class="qa-sublabel">Salin template yang ada sebagai basis baru</div>
-        </div>
-        <div class="qa-card" onclick="openModal('share')">
-          <div class="qa-icon">🔗</div>
-          <div class="qa-label">Bagikan Link</div>
-          <div class="qa-sublabel">Salin link demo template untuk klien</div>
-        </div>
-        <div class="qa-card" onclick="openModal('export')">
-          <div class="qa-icon">📦</div>
-          <div class="qa-label">Export Proyek</div>
-          <div class="qa-sublabel">Bungkus file template siap deploy</div>
-        </div>
-        <div class="qa-card" onclick="openModal('settings')">
-          <div class="qa-icon">⚙</div>
-          <div class="qa-label">Pengaturan Studio</div>
-          <div class="qa-sublabel">Kelola branding dan konfigurasi studio</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Features ─── -->
-    <section id="fitur" class="features-section">
-      <div class="section-header">
-        <div>
-          <div class="section-label">Keunggulan</div>
-          <h2 class="section-title">Fitur <span>Platform</span></h2>
-        </div>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon fi-gold">🎨</div>
-          <div class="feature-title">Multi-Template</div>
-          <div class="feature-desc">Kelola berbagai jenis template undangan — pernikahan, ulang tahun, khitanan, dan lainnya — dalam satu dashboard terpusat.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-rose">📱</div>
-          <div class="feature-title">Mobile-First Design</div>
-          <div class="feature-desc">Setiap template dioptimalkan untuk tampil sempurna di perangkat mobile, dengan layout responsif dan UX yang intuitif.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-teal">⚡</div>
-          <div class="feature-title">React + Vite</div>
-          <div class="feature-desc">Dibangun dengan teknologi modern — React, TypeScript, Tailwind CSS, dan Vite — untuk performa dan kemudahan pengembangan terbaik.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-purple">🔧</div>
-          <div class="feature-title">Mudah Dikustomisasi</div>
-          <div class="feature-desc">Setiap template mudah disesuaikan dengan data klien — nama, foto, tanggal, lokasi, dan rekening — tanpa mengubah kode inti.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── CTA Banner ─── -->
-    <div class="cta-banner">
-      <h2 class="cta-title">Siap Membuat <span>Template Berikutnya?</span></h2>
-      <p class="cta-desc">Perluas koleksi template studio Anda dan hadirkan pengalaman undangan digital yang tak terlupakan untuk setiap klien.</p>
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative;">
-        <button class="btn-primary" onclick="openModal('new-template')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Buat Template Baru
-        </button>
-        <a href="/wedding/" class="btn-ghost">Lihat Template Wedding →</a>
+      <div class="stat-box">
+        <div class="stat-num">3+</div>
+        <div class="stat-lbl">Desain Pilihan</div>
       </div>
     </div>
+  </section>
 
-  </div><!-- /wrapper -->
+  <!-- ─── Features Pill Strip ─── -->
+  <div class="features-strip">
+    <div class="feat-pill">🎵 Musik Pengiring</div>
+    <div class="feat-pill">⏰ Countdown Hari-H</div>
+    <div class="feat-pill">📍 Maps Lokasi</div>
+    <div class="feat-pill">📸 Galeri Foto</div>
+    <div class="feat-pill">💌 RSVP Online</div>
+    <div class="feat-pill">💝 Amplop Digital</div>
+    <div class="feat-pill">📱 Bisa Dishare ke WA</div>
+    <div class="feat-pill">🔗 Link Khusus Nama Tamu</div>
+  </div>
+
+  <!-- ─── Wave Top ─── -->
+  <div class="wave-divider bg-blush">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60" width="100%">
+      <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,0 L0,0 Z" fill="#FFF8F2"/>
+    </svg>
+  </div>
+
+  <!-- ─── Template Section ─── -->
+  <div class="bg-blush" id="template">
+    <div class="section">
+      <div class="sec-header center">
+        <div class="sec-label">Koleksi</div>
+        <h2 class="sec-title">Pilih Template <em>Favoritmu</em></h2>
+        <p class="sec-desc">Setiap template dirancang dengan penuh cinta untuk momen istimewa Anda</p>
+      </div>
+
+      <div class="templates-grid">
+
+        <!-- Wedding Sketch -->
+        <div class="t-card">
+          <div class="card-ribbon">✦ Tersedia</div>
+          <div class="t-preview prev-1">
+            <div class="prev-deco" style="width:200px;height:200px;background:radial-gradient(var(--rose),transparent);top:-60px;right:-60px;"></div>
+            <div class="prev-deco" style="width:150px;height:150px;background:radial-gradient(var(--sage),transparent);bottom:-40px;left:-40px;"></div>
+            <div class="t-preview-phone">
+              <div class="phone-notch"></div>
+              <div style="font-family:'Dancing Script',cursive; font-size:10px; color:#D4849C; text-align:center; margin-top:10px;">Sarah & Ahmad</div>
+              <div style="font-size:6px; color:#A3B565; letter-spacing:1.5px; text-align:center;">WEDDING</div>
+              <div style="width:44px; height:1px; background:linear-gradient(90deg,transparent,#A3B565,transparent); margin:4px auto;"></div>
+              <div style="font-size:5px; color:#6B4E4E; text-align:center; letter-spacing:0.5px;">12 · 12 · 2025</div>
+              <div style="font-size:5px; color:#A3B565; text-align:center; margin-top:3px;">Bandung</div>
+            </div>
+          </div>
+          <div class="t-body">
+            <div class="t-tag tag-live">● Tersedia Sekarang</div>
+            <div class="t-name">Wedding Sketch</div>
+            <p class="t-desc">Desain sketsa artistik nan romantis dengan palet cream & blush. Cocok untuk pasangan yang suka kesan hangat dan intimate.</p>
+            <div class="t-features">
+              <span class="t-feat">Splash Screen</span>
+              <span class="t-feat">Countdown</span>
+              <span class="t-feat">Galeri Foto</span>
+              <span class="t-feat">RSVP</span>
+              <span class="t-feat">Amplop Digital</span>
+            </div>
+            <div class="t-footer">
+              <div>
+                <div class="t-price">Rp 150rb</div>
+                <div class="t-price-note">sudah termasuk revisi</div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <a href="/wedding/" target="_blank" class="t-btn" style="background:rgba(212,132,156,0.1); color:var(--rose-dk); border:1.5px solid rgba(212,132,156,0.25); border-radius:100px; padding:10px 16px; font-size:13px; font-weight:600; text-decoration:none;">👁 Preview</a>
+                <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%2C%20saya%20tertarik%20dengan%20template%20Wedding%20Sketch%20😊" target="_blank" class="t-btn t-btn-live">Pesan ✦</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elegant Floral -->
+        <div class="t-card">
+          <div class="card-ribbon ribbon-soon">🌸 Segera Hadir</div>
+          <div class="t-preview prev-2">
+            <div class="prev-deco" style="width:180px;height:180px;background:radial-gradient(#C8B8D8,transparent);top:-50px;left:-50px;"></div>
+            <div class="t-preview-phone" style="background:#F0EAFA;">
+              <div class="phone-notch" style="background:rgba(155,132,192,0.2);"></div>
+              <div style="font-size:18px; margin-top:14px;">🌸</div>
+              <div style="font-family:'Dancing Script',cursive; font-size:9px; color:#9B84C0; text-align:center; margin-top:4px;">Elegant</div>
+              <div style="font-size:6px; color:rgba(155,132,192,0.6); text-align:center; letter-spacing:1px;">FLORAL</div>
+            </div>
+          </div>
+          <div class="t-body">
+            <div class="t-tag tag-soon">🕐 Segera Hadir</div>
+            <div class="t-name">Elegant Floral</div>
+            <p class="t-desc">Mewah dengan ilustrasi bunga watercolor, tipografi serif klasik nan romantis, dan animasi petal jatuh yang memukau.</p>
+            <div class="t-features">
+              <span class="t-feat">Animasi Bunga</span>
+              <span class="t-feat">Musik</span>
+              <span class="t-feat">Galeri</span>
+              <span class="t-feat">RSVP</span>
+            </div>
+            <div class="t-footer">
+              <div>
+                <div class="t-price" style="color:var(--lav); filter:blur(4px); user-select:none;">Rp ???</div>
+                <div class="t-price-note">belum tersedia</div>
+              </div>
+              <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%2C%20saya%20tertarik%20dengan%20template%20Elegant%20Floral%2C%20kapan%20tersedia%3F" target="_blank" class="t-btn t-btn-soon">Notifikasi 🔔</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modern Dark -->
+        <div class="t-card">
+          <div class="card-ribbon ribbon-soon">✦ Segera Hadir</div>
+          <div class="t-preview prev-3">
+            <div class="prev-deco" style="width:160px;height:160px;background:radial-gradient(#D9A96A,transparent);bottom:-40px;right:-40px;"></div>
+            <div class="t-preview-phone" style="background:#1a1625; border-color:rgba(217,169,106,0.3);">
+              <div class="phone-notch" style="background:rgba(217,169,106,0.2);"></div>
+              <div style="font-size:16px; margin-top:14px;">◆</div>
+              <div style="font-size:7px; color:#D9A96A; text-align:center; margin-top:4px; letter-spacing:1px;">MODERN</div>
+              <div style="font-size:6px; color:rgba(217,169,106,0.5); text-align:center; letter-spacing:0.5px;">LUXE</div>
+            </div>
+          </div>
+          <div class="t-body">
+            <div class="t-tag tag-soon">🕐 Segera Hadir</div>
+            <div class="t-name">Modern Luxe</div>
+            <p class="t-desc">Tema dark premium dengan aksen emas mewah. Pilihan sempurna untuk pasangan yang menginginkan kesan glamour dan contemporary.</p>
+            <div class="t-features">
+              <span class="t-feat">Dark Mode</span>
+              <span class="t-feat">Aksen Emas</span>
+              <span class="t-feat">Animasi</span>
+              <span class="t-feat">RSVP</span>
+            </div>
+            <div class="t-footer">
+              <div>
+                <div class="t-price" style="color:var(--gold); filter:blur(4px); user-select:none;">Rp ???</div>
+                <div class="t-price-note">belum tersedia</div>
+              </div>
+              <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%2C%20saya%20tertarik%20dengan%20template%20Modern%20Luxe%2C%20kapan%20tersedia%3F" target="_blank" class="t-btn t-btn-soon">Notifikasi 🔔</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Wave ─── -->
+  <div class="wave-divider" style="background:#FFF8F2;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60" width="100%">
+      <path d="M0,30 C360,0 720,60 1080,30 C1260,15 1380,45 1440,30 L1440,60 L0,60 Z" fill="#FFF0F5"/>
+    </svg>
+  </div>
+
+  <!-- ─── Cara Pesan ─── -->
+  <div class="bg-blush" id="cara-pesan">
+    <div class="section">
+      <div class="sec-header center">
+        <div class="sec-label">Mudah</div>
+        <h2 class="sec-title">Cara <em>Pesan</em> — Gampang Banget!</h2>
+        <p class="sec-desc">Hanya 4 langkah sederhana untuk mendapatkan undangan digital impian Anda</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-card" style="animation-delay:0.05s">
+          <div class="step-num">01</div>
+          <div class="step-icon">👀</div>
+          <div class="step-title">Pilih Template</div>
+          <p class="step-desc">Pilih template favorit Anda dari koleksi kami. Klik preview untuk melihat tampilannya dulu!</p>
+          <span class="step-connector">→</span>
+        </div>
+        <div class="step-card" style="animation-delay:0.12s">
+          <div class="step-num">02</div>
+          <div class="step-icon">💬</div>
+          <div class="step-title">Hubungi WhatsApp</div>
+          <p class="step-desc">Hubungi kami via WhatsApp dan kirimkan data nama, tanggal, lokasi, dan foto-foto Anda.</p>
+          <span class="step-connector">→</span>
+        </div>
+        <div class="step-card" style="animation-delay:0.19s">
+          <div class="step-num">03</div>
+          <div class="step-icon">🎨</div>
+          <div class="step-title">Proses & Revisi</div>
+          <p class="step-desc">Kami kerjakan dalam 1-3 hari kerja. Bebas revisi hingga Anda benar-benar puas!</p>
+          <span class="step-connector">→</span>
+        </div>
+        <div class="step-card" style="animation-delay:0.26s">
+          <div class="step-num">04</div>
+          <div class="step-icon">🎉</div>
+          <div class="step-title">Terima & Bagikan!</div>
+          <p class="step-desc">Terima link undangan Anda dan langsung bagikan ke semua tamu via WhatsApp, Instagram, atau media sosial lainnya.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Wave ─── -->
+  <div class="wave-divider" style="background:#FFF0F5;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60" width="100%">
+      <path d="M0,20 C480,60 960,0 1440,40 L1440,0 L0,0 Z" fill="#FFF8F2"/>
+    </svg>
+  </div>
+
+  <!-- ─── Ulasan ─── -->
+  <div id="ulasan">
+    <div class="section">
+      <div class="sec-header center">
+        <div class="sec-label">Testimoni</div>
+        <h2 class="sec-title">Apa Kata <em>Mereka?</em></h2>
+        <p class="sec-desc">Kepuasan pelanggan adalah kebahagiaan kami yang sesungguhnya 💕</p>
+      </div>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+          <p class="testi-text">"Tampilannya cantik banget, tamu-tamu pada tanya ini bikin sendiri atau beli jadi? Hehe. Prosesnya cepet dan responsif banget, puas banget deh!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-1">R</div>
+            <div>
+              <div class="testi-name">Rizky & Nabila</div>
+              <div class="testi-date">Wedding Sketch · Mei 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+          <p class="testi-text">"Revisinya dilayani dengan sabar banget, sampai detail kecil pun diperhatikan. Undangannya jadi viral di group keluarga, banyak yang minta link-nya 😂"</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-2">F</div>
+            <div>
+              <div class="testi-name">Farhan & Putri</div>
+              <div class="testi-date">Wedding Sketch · April 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+          <p class="testi-text">"Harganya terjangkau tapi kualitasnya premium banget! Fitur RSVPnya berguna banget, jadi tahu berapa tamu yang datang. Recommended!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-3">A</div>
+            <div>
+              <div class="testi-name">Ahmad & Sari</div>
+              <div class="testi-date">Wedding Sketch · Maret 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── CTA ─── -->
+  <div class="cta-section">
+    <div class="cta-bg"></div>
+    <!-- Deco -->
+    <div class="cta-deco" style="top:20px;left:5%;font-size:40px;opacity:0.1;animation:blobFloat 8s ease-in-out infinite alternate;">🌸</div>
+    <div class="cta-deco" style="bottom:20px;right:8%;font-size:50px;opacity:0.08;animation:blobFloat 11s ease-in-out infinite alternate-reverse;">🌺</div>
+    <div class="cta-deco" style="top:40%;left:2%;font-size:30px;opacity:0.08;animation:blobFloat 9s ease-in-out infinite alternate;">✿</div>
+
+    <div class="cta-inner">
+      <div class="sec-label" style="justify-content:center; margin-bottom:20px;">Yuk, Mulai!</div>
+      <h2 class="cta-title">Wujudkan Undangan Impian <span>Kalian</span> Sekarang 💕</h2>
+      <p class="cta-desc">Jangan tunda lagi! Hubungi kami sekarang dan buat undangan digital yang tak terlupakan untuk hari spesial kalian.</p>
+      <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%21%20Saya%20ingin%20pesan%20undangan%20digital%20untuk%20pernikahan%20saya%20%F0%9F%92%95" target="_blank" class="wa-btn">
+        <span class="wa-icon">💬</span>
+        Chat WhatsApp Sekarang
+      </a>
+      <div style="margin-top:20px; font-size:13px; color:var(--warm-lt);">
+        Respons cepat · Konsultasi gratis · Bebas revisi
+      </div>
+    </div>
+  </div>
 
   <!-- ─── Footer ─── -->
   <footer>
-    <div class="wrapper">
-      <div class="footer-inner">
-        <div class="footer-logo">Rdir <span>Studio</span></div>
-        <div class="footer-copy">© 2025 Rdir Studio · Semua template dibuat dengan ✦</div>
-        <div class="footer-links">
-          <a href="#templates" class="footer-link">Template</a>
-          <a href="#fitur" class="footer-link">Fitur</a>
-          <a href="#aksi" class="footer-link">Aksi Cepat</a>
-        </div>
-      </div>
+    <div class="footer-logo-text">Rdir Studio</div>
+    <p class="footer-tagline">Mengabadikan momen cinta dalam sebuah tautan ✦</p>
+    <div class="footer-links">
+      <a href="#template" class="footer-link">Template</a>
+      <a href="#cara-pesan" class="footer-link">Cara Pesan</a>
+      <a href="#ulasan" class="footer-link">Ulasan</a>
+      <a href="https://wa.me/62XXXXXXXXXX" target="_blank" class="footer-link">WhatsApp</a>
+    </div>
+    <div class="footer-copy">
+      © 2025 Rdir Studio · Dibuat dengan <span class="footer-hearts">❤</span> untuk setiap pasangan
     </div>
   </footer>
 
-  <!-- ─── Modals ─── -->
-  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
-    <div class="modal" id="modal-content">
-      <!-- Content set by JS -->
-    </div>
-  </div>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/62XXXXXXXXXX?text=Halo%20Rdir%20Studio%21%20Saya%20ingin%20pesan%20undangan%20digital%20%F0%9F%92%95" target="_blank" class="float-wa">
+    <span class="float-wa-tooltip">Chat WhatsApp 💬</span>
+    💬
+  </a>
 
   <script>
-    /* ─── Filter ─── */
-    function filterTemplates(cat, btn) {
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.template-card').forEach(card => {
-        const cardCat = card.dataset.cat;
-        if (cat === 'semua' || cardCat === cat) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+    // Animate petal fall loop
+    document.querySelectorAll('.petal').forEach(p => {
+      p.style.animationPlayState = 'running';
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    }
-
-    /* ─── Modal System ─── */
-    const modals = {
-      'new-template': {
-        title: '✦ Buat Template Baru',
-        desc: 'Tentukan nama dan kategori template yang ingin Anda buat. Tim Anda akan segera memulai pengembangan.',
-        fields: [
-          { placeholder: 'Nama Template (cth: Sakura Bliss)', type: 'text' },
-          { placeholder: 'Kategori (Pernikahan / Ulang Tahun / Lainnya)', type: 'text' },
-          { placeholder: 'Deskripsi singkat template...', type: 'text' },
-        ],
-        btn: 'Buat Template',
-        btnClass: 'primary-action'
-      },
-      'notify': {
-        title: '🔔 Dapatkan Notifikasi',
-        desc: 'Template ini masih dalam pengembangan. Simpan pengingat agar Anda tidak melewatkan saat template ini selesai.',
-        fields: [
-          { placeholder: 'Nama template yang ditunggu', type: 'text' },
-        ],
-        btn: 'Simpan Pengingat',
-        btnClass: ''
-      },
-      'duplicate': {
-        title: '⧉ Duplikasi Template',
-        desc: 'Pilih template yang ingin diduplikasi sebagai dasar template baru Anda.',
-        fields: [
-          { placeholder: 'Template sumber (cth: Wedding Sketch)', type: 'text' },
-          { placeholder: 'Nama template baru', type: 'text' },
-        ],
-        btn: 'Duplikasi Sekarang',
-        btnClass: ''
-      },
-      'share': {
-        title: '🔗 Bagikan Template',
-        desc: 'Salin link demo berikut untuk dikirimkan ke klien Anda.',
-        fields: [
-          { placeholder: window.location.origin + '/wedding/', type: 'text', readonly: true },
-        ],
-        btn: 'Salin Link',
-        btnClass: ''
-      },
-      'export': {
-        title: '📦 Export Proyek',
-        desc: 'Ekspor template sebagai build siap produksi untuk di-deploy ke hosting Anda.',
-        fields: [
-          { placeholder: 'Pilih template untuk di-export', type: 'text' },
-        ],
-        btn: 'Export Build',
-        btnClass: ''
-      },
-      'settings': {
-        title: '⚙ Pengaturan Studio',
-        desc: 'Kelola informasi branding dan konfigurasi dasar Rdir Studio Anda.',
-        fields: [
-          { placeholder: 'Nama Studio (cth: Rdir Studio)', type: 'text' },
-          { placeholder: 'No. WhatsApp / Kontak', type: 'text' },
-          { placeholder: 'Tagline Studio', type: 'text' },
-        ],
-        btn: 'Simpan Pengaturan',
-        btnClass: ''
-      },
-    };
-
-    function openModal(key) {
-      const m = modals[key];
-      if (!m) return;
-      const fieldsHTML = m.fields.map(f =>
-        `<input class="modal-input" type="${f.type}" placeholder="${f.placeholder}" ${f.readonly ? 'readonly value="'+f.placeholder+'"' : ''} />`
-      ).join('');
-      document.getElementById('modal-content').innerHTML = `
-        <h3 class="modal-title">${m.title}</h3>
-        <p class="modal-desc">${m.desc}</p>
-        ${fieldsHTML}
-        <div class="modal-actions">
-          <button class="btn-close" onclick="closeModal()">Batal</button>
-          <button class="card-action-btn ${m.btnClass}" onclick="handleModalAction('${key}')">${m.btn}</button>
-        </div>
-      `;
-      document.getElementById('modal-overlay').classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('modal-overlay').classList.remove('open');
-    }
-
-    function closeModalOnOverlay(e) {
-      if (e.target.id === 'modal-overlay') closeModal();
-    }
-
-    function handleModalAction(key) {
-      if (key === 'share') {
-        navigator.clipboard.writeText(window.location.origin + '/wedding/').catch(() => {});
-      }
-      closeModal();
-      showToast(key);
-    }
-
-    /* ─── Toast ─── */
-    function showToast(key) {
-      const messages = {
-        'new-template': '✦ Template baru berhasil ditambahkan ke daftar!',
-        'notify': '🔔 Pengingat berhasil disimpan.',
-        'duplicate': '⧉ Template berhasil diduplikasi.',
-        'share': '🔗 Link berhasil disalin ke clipboard.',
-        'export': '📦 Export dimulai. Periksa folder build Anda.',
-        'settings': '⚙ Pengaturan berhasil disimpan.',
-      };
-      const toast = document.createElement('div');
-      toast.style.cssText = `
-        position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-        background: var(--bg-surface); border: 1px solid rgba(212,168,83,0.3);
-        color: var(--text-primary); padding: 14px 24px;
-        border-radius: 100px; font-size: 14px; font-weight: 500;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-        z-index: 9999; animation: fadeInUp 0.3s ease;
-        white-space: nowrap;
-      `;
-      toast.textContent = messages[key] || 'Berhasil!';
-      document.body.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-      }, 3000);
-    }
-
-    /* ─── Stats Counter Animation ─── */
-    function animateCount(el, target, suffix = '') {
-      if (target === '—') { el.textContent = '—'; return; }
-      let current = 0;
-      const step = Math.ceil(target / 30);
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        el.textContent = current + suffix;
-        if (current >= target) clearInterval(timer);
-      }, 40);
-    }
-
-    // Animate stats on load
-    setTimeout(() => {
-      animateCount(document.getElementById('stat-templates'), 1);
-      animateCount(document.getElementById('stat-live'), 1);
-    }, 600);
-
-    /* ─── Keyboard shortcut ─── */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        openModal('new-template');
-      }
     });
   </script>
 </body>
